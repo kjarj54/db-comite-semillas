@@ -1,6 +1,6 @@
 ﻿/*
 Created: 19/4/2025
-Modified: 25/5/2025
+Modified: 11/6/2025
 Model: db-comite-semillas
 Database: Oracle 18c
 */
@@ -193,6 +193,14 @@ CREATE SEQUENCE dcs_sintoma_seq01
 ;
 
 CREATE SEQUENCE dcs_plaga_seq01
+ INCREMENT BY 1
+ START WITH 1
+ NOMAXVALUE
+ MINVALUE 0
+ NOCACHE
+;
+
+CREATE SEQUENCE dcs_ingeniero_seq01
  INCREMENT BY 1
  START WITH 1
  NOMAXVALUE
@@ -428,7 +436,8 @@ CREATE TABLE dcs_reproduccion(
   fin_id Number,
   lot_id Number,
   est_id Number,
-  cos_id Number
+  cos_id Number,
+  inge_id Number
 )
 ;
 
@@ -443,13 +452,13 @@ CREATE INDEX dcs_finca_repro_fk01 ON dcs_reproduccion (fin_id)
 CREATE INDEX dcs_lote_repro_fk01 ON dcs_reproduccion (lot_id)
 ;
 
-CREATE INDEX dcs_persona_repro_fk02 ON dcs_reproduccion (per_id)
-;
-
 CREATE INDEX dcs_estado_reproduccion_fk01 ON dcs_reproduccion (est_id)
 ;
 
 CREATE INDEX dcs_cosecha_repro_fk01 ON dcs_reproduccion (cos_id)
+;
+
+CREATE INDEX dcs_ing_repro_fk01 ON dcs_reproduccion (inge_id)
 ;
 
 -- Add keys for table dcs_reproduccion
@@ -750,6 +759,25 @@ CREATE INDEX dcs_enfermedad_sintomas_fk01 ON dcs_sintomas (enf_id)
 -- Add keys for table dcs_sintomas
 
 ALTER TABLE dcs_sintomas ADD CONSTRAINT PK_dcs_sintomas PRIMARY KEY (sin_id)
+;
+
+-- Table dcs_ingeniero
+
+CREATE TABLE dcs_ingeniero(
+  inge_id Number NOT NULL,
+  codigo Number,
+  per_id Number
+)
+;
+
+-- Create indexes for table dcs_ingeniero
+
+CREATE INDEX dcs_per_ing_fk01 ON dcs_ingeniero (per_id)
+;
+
+-- Add keys for table dcs_ingeniero
+
+ALTER TABLE dcs_ingeniero ADD CONSTRAINT PK_dcs_ingeniero PRIMARY KEY (inge_id)
 ;
 
 -- Trigger for sequence dcs_persona_seq01 for column per_id in table dcs_persona_fisica ---------
@@ -1136,11 +1164,6 @@ ALTER TABLE dcs_reproduccion ADD CONSTRAINT dcs_lote_repro_fk01 FOREIGN KEY (lot
 
 
 
-ALTER TABLE dcs_reproduccion ADD CONSTRAINT dcs_persona_repro_fk02 FOREIGN KEY (per_id) REFERENCES dcs_persona_fisica (per_id)
-;
-
-
-
 ALTER TABLE dcs_reproduccion ADD CONSTRAINT dcs_estado_reproduccion_fk01 FOREIGN KEY (est_id) REFERENCES dcs_estado_general (est_id)
 ;
 
@@ -1267,6 +1290,16 @@ ALTER TABLE dcs_sintomas ADD CONSTRAINT dcs_enfermedad_sintomas_fk01 FOREIGN KEY
 
 
 ALTER TABLE dcs_junta_directiva ADD CONSTRAINT dcs_asociacion_junta_fk01 FOREIGN KEY (asociacion_id) REFERENCES dcs_asociacion (asociacion_id)
+;
+
+
+
+ALTER TABLE dcs_ingeniero ADD CONSTRAINT dcs_per_ing_fk01 FOREIGN KEY (per_id) REFERENCES dcs_persona_fisica (per_id)
+;
+
+
+
+ALTER TABLE dcs_reproduccion ADD CONSTRAINT dcs_ing_repro_fk01 FOREIGN KEY (inge_id) REFERENCES dcs_ingeniero (inge_id)
 ;
 
 
