@@ -2,14 +2,17 @@ create or replace package PckCSemilla is
 
   -- Author  : KEVIN
   -- Created : 11/6/2025 21:02:26
-  -- Purpose : Paquete para gestión del comité de semillas
+  -- Purpose : Package para gestión del comité de semillas
   
-  -- Funciones públicas
+  -- Public function and procedure declarations
+  
+  -- Función para actualizar cuotas mensuales por cosecha
   function fcActualizaCuota(
     p_cosecha_id IN NUMBER,
     p_porcentaje_aumento IN NUMBER
   ) return VARCHAR2;
   
+  -- Función para registrar análisis de enfermedad
   function fcRegistraAnalisisEnfermedad(
     p_reproduccion_id IN NUMBER,
     p_motivo IN VARCHAR2,
@@ -19,7 +22,7 @@ create or replace package PckCSemilla is
     p_observaciones IN VARCHAR2 DEFAULT NULL
   ) return VARCHAR2;
   
-  -- Procedimientos públicos
+  -- Procedimiento para consultar pagos realizados por asociado
   procedure pcPagoRealizado(
     p_cedula_asociado IN VARCHAR2,
     p_cosecha_id IN NUMBER,
@@ -28,6 +31,7 @@ create or replace package PckCSemilla is
     p_mensaje OUT VARCHAR2
   );
   
+  -- Procedimiento para registrar inspección
   procedure pcRegistraInspeccion(
     p_lote_id IN NUMBER,
     p_ingeniero_id IN NUMBER,
@@ -35,6 +39,7 @@ create or replace package PckCSemilla is
     p_mensaje OUT VARCHAR2
   );
   
+  -- Procedimiento para registrar reproducción
   procedure pcRegistraReproduccion(
     p_finca_id IN NUMBER,
     p_lote_id IN NUMBER,
@@ -50,11 +55,13 @@ end PckCSemilla;
 /
 create or replace package body PckCSemilla is
 
-  -- Implementación de funciones
+  -- Function and procedure implementations
+  
+  -- Implementación de fcActualizaCuota
   function fcActualizaCuota(
     p_cosecha_id IN NUMBER,
     p_porcentaje_aumento IN NUMBER
-  ) return VARCHAR2 IS
+  ) return VARCHAR2 is
     v_count_cosecha NUMBER := 0;
     v_count_asociados NUMBER := 0;
     v_registros_actualizados NUMBER := 0;
@@ -161,6 +168,7 @@ create or replace package body PckCSemilla is
         
   END fcActualizaCuota;
   
+  -- Implementación de fcRegistraAnalisisEnfermedad
   function fcRegistraAnalisisEnfermedad(
     p_reproduccion_id IN NUMBER,
     p_motivo IN VARCHAR2,
@@ -168,7 +176,7 @@ create or replace package body PckCSemilla is
     p_monto IN NUMBER,
     p_enfermedad_id IN NUMBER,
     p_observaciones IN VARCHAR2 DEFAULT NULL
-  ) return VARCHAR2 IS
+  ) return VARCHAR2 is
     v_count_reproduccion NUMBER := 0;
     v_count_enfermedad NUMBER := 0;
     v_ana_id NUMBER;
@@ -332,14 +340,14 @@ create or replace package body PckCSemilla is
         
   END fcRegistraAnalisisEnfermedad;
   
-  -- Implementación de procedimientos
+  -- Implementación de pcPagoRealizado
   procedure pcPagoRealizado(
     p_cedula_asociado IN VARCHAR2,
     p_cosecha_id IN NUMBER,
     p_monto_total OUT NUMBER,
     p_cantidad_total OUT NUMBER,
     p_mensaje OUT VARCHAR2
-  ) IS
+  ) is
     v_count_asociado NUMBER := 0;
     v_count_cosecha NUMBER := 0;
     v_count_pagos NUMBER := 0;
@@ -454,12 +462,13 @@ create or replace package body PckCSemilla is
         
   END pcPagoRealizado;
   
+  -- Implementación de pcRegistraInspeccion
   procedure pcRegistraInspeccion(
     p_lote_id IN NUMBER,
     p_ingeniero_id IN NUMBER,
     p_comentario IN VARCHAR2,
     p_mensaje OUT VARCHAR2
-  ) IS
+  ) is
     v_count_lote NUMBER := 0;
     v_count_ingeniero NUMBER := 0;
     v_count_reproduccion NUMBER := 0;
@@ -629,6 +638,7 @@ create or replace package body PckCSemilla is
         
   END pcRegistraInspeccion;
   
+  -- Implementación de pcRegistraReproduccion
   procedure pcRegistraReproduccion(
     p_finca_id IN NUMBER,
     p_lote_id IN NUMBER,
@@ -638,7 +648,7 @@ create or replace package body PckCSemilla is
     p_fecha_siembra_fin IN DATE,
     p_ingeniero_id IN NUMBER,
     p_mensaje OUT VARCHAR2
-  ) IS
+  ) is
     v_count_finca NUMBER := 0;
     v_count_lote NUMBER := 0;
     v_count_variedad NUMBER := 0;
@@ -804,18 +814,18 @@ create or replace package body PckCSemilla is
         FROM dcs_estado_general
         WHERE est_descripcion = 'Activo'
         AND ROWNUM = 1;
-        
-    EXCEPTION
+          EXCEPTION
         WHEN NO_DATA_FOUND THEN
             p_mensaje := 'ERROR: No se encontró el estado "Activo" en el sistema';
             RETURN;
         WHEN OTHERS THEN
+            p_mensaje := 'ERROR: Error al obtener el estado activo - ' || SQLERRM;
             RETURN;
     END;
-    
-    -- Validar que las fechas de siembra estén dentro del período de la cosecha
+      -- Validar que las fechas de siembra estén dentro del período de la cosecha
     IF p_fecha_siembra_inicio < v_fecha_cosecha_inicio OR p_fecha_siembra_fin > v_fecha_cosecha_fin THEN
         p_mensaje := 'ADVERTENCIA: Las fechas de siembra están fuera del período de la cosecha (' || 
+                    TO_CHAR(v_fecha_cosecha_inicio, 'DD/MM/YYYY') || ' - ' || 
                     TO_CHAR(v_fecha_cosecha_fin, 'DD/MM/YYYY') || ')';
         -- Continuar pero advertir
     END IF;
@@ -834,8 +844,7 @@ create or replace package body PckCSemilla is
         WHEN OTHERS THEN
             v_contrato_numero := TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY') || '001');
     END;
-    
-    -- Verificar que no exista otra reproducción activa en el mismo lote y período
+      -- Verificar que no exista otra reproducción activa en el mismo lote y período
     DECLARE
         v_count_overlap NUMBER := 0;
     BEGIN
@@ -846,20 +855,21 @@ create or replace package body PckCSemilla is
         WHERE r.lot_id = p_lote_id
         AND eg.est_descripcion IN ('Activo', 'Pendiente')
         AND ((p_fecha_siembra_inicio BETWEEN r.rep_fecha_siembra_inicio AND r.rep_fecha_cosecha_fin)
-             OR (p_fecha_siembra_fin BETWEEN r.rep_fecha_siembra_inicio AND r.rep_fecha_cosecha_fin));
+             OR (p_fecha_siembra_fin BETWEEN r.rep_fecha_siembra_inicio AND r.rep_fecha_cosecha_fin)
+             OR (r.rep_fecha_siembra_inicio BETWEEN p_fecha_siembra_inicio AND v_fecha_cosecha_fin));
         
         IF v_count_overlap > 0 THEN
-            p_mensaje := 'ERROR: Ya existe una reproducción activa en el mismo lote durante el período especificado';
+            p_mensaje := 'ERROR: Ya existe una reproducción activa en el lote ' || v_lote_nombre || 
+                        ' que se superpone con las fechas especificadas';
             RETURN;
         END IF;
         
     EXCEPTION
         WHEN OTHERS THEN
-            p_mensaje := 'ERROR: Error al verificar solapamiento de reproducciones - ' || SQLERRM;
+            p_mensaje := 'ERROR: Error al verificar superposición de reproducciones - ' || SQLERRM;
             RETURN;
     END;
-    
-    -- Insertar la nueva reproducción
+      -- Insertar la nueva reproducción
     BEGIN
         INSERT INTO dcs_reproduccion (
             rep_numero_contrato,
@@ -867,11 +877,12 @@ create or replace package body PckCSemilla is
             rep_fecha_siembra_fin,
             rep_fecha_cosecha_inicio,
             rep_fecha_cosecha_fin,
+            rep_hectareas_sembradas,
+            per_id,
             fin_id,
             lot_id,
-            var_id,
-            cos_id,
             est_id,
+            cos_id,
             inge_id
         ) VALUES (
             v_contrato_numero,
@@ -879,11 +890,12 @@ create or replace package body PckCSemilla is
             p_fecha_siembra_fin,
             v_fecha_cosecha_inicio,
             v_fecha_cosecha_fin,
+            v_hectareas_lote,
+            v_per_id,
             p_finca_id,
             p_lote_id,
-            p_variedad_id,
-            p_cosecha_id,
             v_est_activo_id,
+            p_cosecha_id,
             p_ingeniero_id
         ) RETURNING rep_id INTO v_rep_id;
         
@@ -898,7 +910,12 @@ create or replace package body PckCSemilla is
                     'Lote: ' || v_lote_nombre || ', ' ||
                     'Variedad: ' || v_variedad_nombre || ', ' ||
                     'Cosecha: ' || v_cosecha_nombre || ', ' ||
-                    'Ingeniero: ' || v_ingeniero_nombre;
+                    'Ingeniero: ' || v_ingeniero_nombre || ', ' ||
+                    'Hectáreas: ' || TO_CHAR(v_hectareas_lote, 'FM999,999,990.00') || ', ' ||
+                    'Siembra: ' || TO_CHAR(p_fecha_siembra_inicio, 'DD/MM/YYYY') || 
+                    ' - ' || TO_CHAR(p_fecha_siembra_fin, 'DD/MM/YYYY') || ', ' ||
+                    'Cosecha prevista: ' || TO_CHAR(v_fecha_cosecha_inicio, 'DD/MM/YYYY') || 
+                    ' - ' || TO_CHAR(v_fecha_cosecha_fin, 'DD/MM/YYYY');
         
     EXCEPTION
         WHEN DUP_VAL_ON_INDEX THEN
@@ -915,5 +932,9 @@ create or replace package body PckCSemilla is
         p_mensaje := 'ERROR: Error inesperado en el procedimiento - ' || SQLERRM;
         
   END pcRegistraReproduccion;
+
+begin
+  -- Initialization
+  NULL;
 end PckCSemilla;
 /
