@@ -784,337 +784,401 @@ ALTER TABLE dcs_ingeniero ADD CONSTRAINT PK_dcs_ingeniero PRIMARY KEY (inge_id)
 CREATE OR REPLACE TRIGGER ts_dcs_persona_fisica_dcs_persona_seq01 BEFORE INSERT
 ON dcs_persona_fisica FOR EACH ROW
 BEGIN
-  :new.per_id := dcs_persona_seq01.nextval;
+    if :new.per_id is null or :new.per_id <= 0 then
+        :new.per_id := dcs_persona_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_persona_fisica_dcs_persona_seq01 AFTER UPDATE OF per_id
 ON dcs_persona_fisica FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column per_id in table dcs_persona_fisica as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column per_id in table dcs_persona_fisica as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_asociado_seq01 for column aso_id in table dcs_asociado ---------
 CREATE OR REPLACE TRIGGER ts_dcs_asociado_dcs_asociado_seq01 BEFORE INSERT
 ON dcs_asociado FOR EACH ROW
 BEGIN
-  :new.aso_id := dcs_asociado_seq01.nextval;
+    if :new.aso_id is null or :new.aso_id <= 0 then
+        :new.aso_id := dcs_asociado_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_asociado_dcs_asociado_seq01 AFTER UPDATE OF aso_id
 ON dcs_asociado FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column aso_id in table dcs_asociado as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column aso_id in table dcs_asociado as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_categoriaaso_seq01 for column cat_id in table dcs_categoria_asociado ---------
 CREATE OR REPLACE TRIGGER ts_dcs_categoria_asociado_dcs_categoriaaso_seq01 BEFORE INSERT
 ON dcs_categoria_asociado FOR EACH ROW
 BEGIN
-  :new.cat_id := dcs_categoriaaso_seq01.nextval;
+    if :new.cat_id is null or :new.cat_id <= 0 then
+        :new.cat_id := dcs_categoriaaso_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_categoria_asociado_dcs_categoriaaso_seq01 AFTER UPDATE OF cat_id
 ON dcs_categoria_asociado FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column cat_id in table dcs_categoria_asociado as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column cat_id in table dcs_categoria_asociado as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_cosecha_seq01 for column cos_id in table dcs_cosecha ---------
 CREATE OR REPLACE TRIGGER ts_dcs_cosecha_dcs_cosecha_seq01 BEFORE INSERT
 ON dcs_cosecha FOR EACH ROW
 BEGIN
-  :new.cos_id := dcs_cosecha_seq01.nextval;
+    if :new.cos_id is null or :new.cos_id <= 0 then
+        :new.cos_id := dcs_cosecha_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_cosecha_dcs_cosecha_seq01 AFTER UPDATE OF cos_id
 ON dcs_cosecha FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column cos_id in table dcs_cosecha as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column cos_id in table dcs_cosecha as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_enfermedad_seq01 for column enf_id in table dcs_enfermedad ---------
 CREATE OR REPLACE TRIGGER ts_dcs_enfermedad_dcs_enfermedad_seq01 BEFORE INSERT
 ON dcs_enfermedad FOR EACH ROW
 BEGIN
-  :new.enf_id := dcs_enfermedad_seq01.nextval;
+    if :new.enf_id is null or :new.enf_id <= 0 then
+        :new.enf_id := dcs_enfermedad_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_enfermedad_dcs_enfermedad_seq01 AFTER UPDATE OF enf_id
 ON dcs_enfermedad FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column enf_id in table dcs_enfermedad as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column enf_id in table dcs_enfermedad as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_plaga_seq01 for column pla_id in table dcs_plaga ---------
 CREATE OR REPLACE TRIGGER ts_dcs_plaga_dcs_plaga_seq01 BEFORE INSERT
 ON dcs_plaga FOR EACH ROW
 BEGIN
-  :new.pla_id := dcs_plaga_seq01.nextval;
+    if :new.pla_id is null or :new.pla_id <= 0 then
+        :new.pla_id := dcs_plaga_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_plaga_dcs_plaga_seq01 AFTER UPDATE OF pla_id
 ON dcs_plaga FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column pla_id in table dcs_plaga as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column pla_id in table dcs_plaga as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_finca_seq01 for column fin_id in table dcs_finca ---------
 CREATE OR REPLACE TRIGGER ts_dcs_finca_dcs_finca_seq01 BEFORE INSERT
 ON dcs_finca FOR EACH ROW
 BEGIN
-  :new.fin_id := dcs_finca_seq01.nextval;
+    if :new.fin_id is null or :new.fin_id <= 0 then
+        :new.fin_id := dcs_finca_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_finca_dcs_finca_seq01 AFTER UPDATE OF fin_id
 ON dcs_finca FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column fin_id in table dcs_finca as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column fin_id in table dcs_finca as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_lote_seq01 for column lot_id in table dcs_lote ---------
 CREATE OR REPLACE TRIGGER ts_dcs_lote_dcs_lote_seq01 BEFORE INSERT
 ON dcs_lote FOR EACH ROW
 BEGIN
-  :new.lot_id := dcs_lote_seq01.nextval;
+    if :new.lot_id is null or :new.lot_id <= 0 then
+        :new.lot_id := dcs_lote_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_lote_dcs_lote_seq01 AFTER UPDATE OF lot_id
 ON dcs_lote FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column lot_id in table dcs_lote as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column lot_id in table dcs_lote as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_semillas_seq01 for column sem_id in table dcs_semilla ---------
 CREATE OR REPLACE TRIGGER ts_dcs_semilla_dcs_semillas_seq01 BEFORE INSERT
 ON dcs_semilla FOR EACH ROW
 BEGIN
-  :new.sem_id := dcs_semillas_seq01.nextval;
+    if :new.sem_id is null or :new.sem_id <= 0 then
+        :new.sem_id := dcs_semillas_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_semilla_dcs_semillas_seq01 AFTER UPDATE OF sem_id
 ON dcs_semilla FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column sem_id in table dcs_semilla as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column sem_id in table dcs_semilla as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_variedad_seq01 for column var_id in table dcs_variedad ---------
 CREATE OR REPLACE TRIGGER ts_dcs_variedad_dcs_variedad_seq01 BEFORE INSERT
 ON dcs_variedad FOR EACH ROW
 BEGIN
-  :new.var_id := dcs_variedad_seq01.nextval;
+    if :new.var_id is null or :new.var_id <= 0 then
+        :new.var_id := dcs_variedad_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_variedad_dcs_variedad_seq01 AFTER UPDATE OF var_id
 ON dcs_variedad FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column var_id in table dcs_variedad as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column var_id in table dcs_variedad as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_umedida_seq01 for column uni_id in table dcs_unidad_medida ---------
 CREATE OR REPLACE TRIGGER ts_dcs_unidad_medida_dcs_umedida_seq01 BEFORE INSERT
 ON dcs_unidad_medida FOR EACH ROW
 BEGIN
-  :new.uni_id := dcs_umedida_seq01.nextval;
+    if :new.uni_id is null or :new.uni_id <= 0 then
+        :new.uni_id := dcs_umedida_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_unidad_medida_dcs_umedida_seq01 AFTER UPDATE OF uni_id
 ON dcs_unidad_medida FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column uni_id in table dcs_unidad_medida as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column uni_id in table dcs_unidad_medida as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_reproduccion_seq01 for column rep_id in table dcs_reproduccion ---------
 CREATE OR REPLACE TRIGGER ts_dcs_reproduccion_dcs_reproduccion_seq01 BEFORE INSERT
 ON dcs_reproduccion FOR EACH ROW
 BEGIN
-  :new.rep_id := dcs_reproduccion_seq01.nextval;
+    if :new.rep_id is null or :new.rep_id <= 0 then
+        :new.rep_id := dcs_reproduccion_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_reproduccion_dcs_reproduccion_seq01 AFTER UPDATE OF rep_id
 ON dcs_reproduccion FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column rep_id in table dcs_reproduccion as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column rep_id in table dcs_reproduccion as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_inspeccion_seq01 for column ins_id in table dcs_inspeccion ---------
 CREATE OR REPLACE TRIGGER ts_dcs_inspeccion_dcs_inspeccion_seq01 BEFORE INSERT
 ON dcs_inspeccion FOR EACH ROW
 BEGIN
-  :new.ins_id := dcs_inspeccion_seq01.nextval;
+    if :new.ins_id is null or :new.ins_id <= 0 then
+        :new.ins_id := dcs_inspeccion_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_inspeccion_dcs_inspeccion_seq01 AFTER UPDATE OF ins_id
 ON dcs_inspeccion FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column ins_id in table dcs_inspeccion as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column ins_id in table dcs_inspeccion as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_analisis_seq01 for column ana_id in table dcs_analisis ---------
 CREATE OR REPLACE TRIGGER ts_dcs_analisis_dcs_analisis_seq01 BEFORE INSERT
 ON dcs_analisis FOR EACH ROW
 BEGIN
-  :new.ana_id := dcs_analisis_seq01.nextval;
+    if :new.ana_id is null or :new.ana_id <= 0 then
+        :new.ana_id := dcs_analisis_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_analisis_dcs_analisis_seq01 AFTER UPDATE OF ana_id
 ON dcs_analisis FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column ana_id in table dcs_analisis as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column ana_id in table dcs_analisis as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_producto_seq01 for column pro_id in table dcs_producto ---------
 CREATE OR REPLACE TRIGGER ts_dcs_producto_dcs_producto_seq01 BEFORE INSERT
 ON dcs_producto FOR EACH ROW
 BEGIN
-  :new.pro_id := dcs_producto_seq01.nextval;
+    if :new.pro_id is null or :new.pro_id <= 0 then
+        :new.pro_id := dcs_producto_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_producto_dcs_producto_seq01 AFTER UPDATE OF pro_id
 ON dcs_producto FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column pro_id in table dcs_producto as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column pro_id in table dcs_producto as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_pago_seq01 for column pag_id in table dcs_pago_productor ---------
 CREATE OR REPLACE TRIGGER ts_dcs_pago_productor_dcs_pago_seq01 BEFORE INSERT
 ON dcs_pago_productor FOR EACH ROW
 BEGIN
-  :new.pag_id := dcs_pago_seq01.nextval;
+    if :new.pag_id is null or :new.pag_id <= 0 then
+        :new.pag_id := dcs_pago_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_pago_productor_dcs_pago_seq01 AFTER UPDATE OF pag_id
 ON dcs_pago_productor FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column pag_id in table dcs_pago_productor as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column pag_id in table dcs_pago_productor as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_ensayo_seq01 for column ens_id in table dcs_ensayo ---------
 CREATE OR REPLACE TRIGGER ts_dcs_ensayo_dcs_ensayo_seq01 BEFORE INSERT
 ON dcs_ensayo FOR EACH ROW
 BEGIN
-  :new.ens_id := dcs_ensayo_seq01.nextval;
+    if :new.ens_id is null or :new.ens_id <= 0 then
+        :new.ens_id := dcs_ensayo_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_ensayo_dcs_ensayo_seq01 AFTER UPDATE OF ens_id
 ON dcs_ensayo FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column ens_id in table dcs_ensayo as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column ens_id in table dcs_ensayo as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_etaensayo_seq01 for column eta_id in table dcs_etapa_ensayo ---------
 CREATE OR REPLACE TRIGGER ts_dcs_etapa_ensayo_dcs_etaensayo_seq01 BEFORE INSERT
 ON dcs_etapa_ensayo FOR EACH ROW
 BEGIN
-  :new.eta_id := dcs_etaensayo_seq01.nextval;
+    if :new.eta_id is null or :new.eta_id <= 0 then
+        :new.eta_id := dcs_etaensayo_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_etapa_ensayo_dcs_etaensayo_seq01 AFTER UPDATE OF eta_id
 ON dcs_etapa_ensayo FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column eta_id in table dcs_etapa_ensayo as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column eta_id in table dcs_etapa_ensayo as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_estado_seq01 for column est_id in table dcs_estado_general ---------
 CREATE OR REPLACE TRIGGER ts_dcs_estado_general_dcs_estado_seq01 BEFORE INSERT
 ON dcs_estado_general FOR EACH ROW
 BEGIN
-  :new.est_id := dcs_estado_seq01.nextval;
+    if :new.est_id is null or :new.est_id <= 0 then
+        :new.est_id := dcs_estado_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_estado_general_dcs_estado_seq01 AFTER UPDATE OF est_id
 ON dcs_estado_general FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column est_id in table dcs_estado_general as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column est_id in table dcs_estado_general as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_junta_seq01 for column jun_id in table dcs_junta_directiva ---------
 CREATE OR REPLACE TRIGGER ts_dcs_junta_directiva_dcs_junta_seq01 BEFORE INSERT
 ON dcs_junta_directiva FOR EACH ROW
 BEGIN
-  :new.jun_id := dcs_junta_seq01.nextval;
+    if :new.jun_id is null or :new.jun_id <= 0 then
+        :new.jun_id := dcs_junta_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_junta_directiva_dcs_junta_seq01 AFTER UPDATE OF jun_id
 ON dcs_junta_directiva FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column jun_id in table dcs_junta_directiva as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column jun_id in table dcs_junta_directiva as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_asociacion_seq01 for column asociacion_id in table dcs_asociacion ---------
 CREATE OR REPLACE TRIGGER ts_dcs_asociacion_dcs_asociacion_seq01 BEFORE INSERT
 ON dcs_asociacion FOR EACH ROW
 BEGIN
-  :new.asociacion_id := dcs_asociacion_seq01.nextval;
+    if :new.asociacion_id is null or :new.asociacion_id <= 0 then
+        :new.asociacion_id := dcs_asociacion_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_asociacion_dcs_asociacion_seq01 AFTER UPDATE OF asociacion_id
 ON dcs_asociacion FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column asociacion_id in table dcs_asociacion as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column asociacion_id in table dcs_asociacion as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_tipocontacto_seq01 for column tc_id in table dcs_tipo_contacto ---------
 CREATE OR REPLACE TRIGGER ts_dcs_tipo_contacto_dcs_tipocontacto_seq01 BEFORE INSERT
 ON dcs_tipo_contacto FOR EACH ROW
 BEGIN
-  :new.tc_id := dcs_tipocontacto_seq01.nextval;
+    if :new.tc_id is null or :new.tc_id <= 0 then
+        :new.tc_id := dcs_tipocontacto_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_tipo_contacto_dcs_tipocontacto_seq01 AFTER UPDATE OF tc_id
 ON dcs_tipo_contacto FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column tc_id in table dcs_tipo_contacto as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column tc_id in table dcs_tipo_contacto as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_contacto_seq01 for column con_id in table dcs_contacto ---------
 CREATE OR REPLACE TRIGGER ts_dcs_contacto_dcs_contacto_seq01 BEFORE INSERT
 ON dcs_contacto FOR EACH ROW
 BEGIN
-  :new.con_id := dcs_contacto_seq01.nextval;
+    if :new.con_id is null or :new.con_id <= 0 then
+        :new.con_id := dcs_contacto_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_contacto_dcs_contacto_seq01 AFTER UPDATE OF con_id
 ON dcs_contacto FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column con_id in table dcs_contacto as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column con_id in table dcs_contacto as it uses sequence.');
 END;
-;
+/
 
 -- Trigger for sequence dcs_sintoma_seq01 for column sin_id in table dcs_sintomas ---------
 CREATE OR REPLACE TRIGGER ts_dcs_sintomas_dcs_sintoma_seq01 BEFORE INSERT
 ON dcs_sintomas FOR EACH ROW
 BEGIN
-  :new.sin_id := dcs_sintoma_seq01.nextval;
+    if :new.sin_id is null or :new.sin_id <= 0 then
+        :new.sin_id := dcs_sintoma_seq01.nextval;
+    end if;
 END;
-;
+/
 CREATE OR REPLACE TRIGGER tsu_dcs_sintomas_dcs_sintoma_seq01 AFTER UPDATE OF sin_id
 ON dcs_sintomas FOR EACH ROW
 BEGIN
-  RAISE_APPLICATION_ERROR(-20010,'Cannot update column sin_id in table dcs_sintomas as it uses sequence.');
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column sin_id in table dcs_sintomas as it uses sequence.');
 END;
-;
+/
+
+-- Trigger for sequence dcs_ingeniero_seq01 for column inge_id in table dcs_ingeniero ---------
+CREATE OR REPLACE TRIGGER ts_dcs_ingeniero_dcs_ingeniero_seq01 BEFORE INSERT
+ON dcs_ingeniero FOR EACH ROW
+BEGIN
+    if :new.inge_id is null or :new.inge_id <= 0 then
+        :new.inge_id := dcs_ingeniero_seq01.nextval;
+    end if;
+END;
+/
+CREATE OR REPLACE TRIGGER tsu_dcs_ingeniero_dcs_ingeniero_seq01 AFTER UPDATE OF inge_id
+ON dcs_ingeniero FOR EACH ROW
+BEGIN
+    RAISE_APPLICATION_ERROR(-20010,'Cannot update column inge_id in table dcs_ingeniero as it uses sequence.');
+END;
+/
 
 
 -- Create foreign keys (relationships) section ------------------------------------------------- 
