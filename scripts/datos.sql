@@ -1,237 +1,269 @@
--- Fecha: 11/6/2025
+-- filepath: d:\carpetaU\PrimerSemestre2025\diseñoOfDB\Proiyecto#2\db-comite-semillas\scripts\datos.sql
 
--- Insertar datos básicos para asociación
+-- DATOS DE PRUEBA PARA EL SISTEMA DE COMITÉ DE SEMILLAS
+-- Insertando datos base necesarios para las pruebas
+
+-- 1. ASOCIACIÓN
 INSERT INTO dcs_asociacion (asociacion_cedula_juridica, asociacion_nombre, asociacion_logo) 
-VALUES (310234567890, 'Asociación de Productores de Semillas Tarrazú', 'http://www.tarrazu.com/logo.png');
+VALUES (3001234567, 'Asociación Productores Tarrazú', 'https://tarrazu.com/logo.png');
 
--- Insertar tipos de contacto
-INSERT INTO dcs_tipo_contacto (tc_nombre) VALUES ('Teléfono');
-INSERT INTO dcs_tipo_contacto (tc_nombre) VALUES ('Email');
-INSERT INTO dcs_tipo_contacto (tc_nombre) VALUES ('Celular');
-
--- Insertar categorías de asociados
+-- 2. CATEGORÍAS DE ASOCIADOS
 INSERT INTO dcs_categoria_asociado (cat_descripcion, cat_monto_cuota_mensual) 
 VALUES ('Productor Básico', 15000);
-INSERT INTO dcs_categoria_asociado (cat_descripcion, cat_monto_cuota_mensual) 
-VALUES ('Productor Avanzado', 25000);
-INSERT INTO dcs_categoria_asociado (cat_descripcion, cat_monto_cuota_mensual) 
-VALUES ('Productor Premium', 35000);
 
--- Insertar estados generales
+INSERT INTO dcs_categoria_asociado (cat_descripcion, cat_monto_cuota_mensual) 
+VALUES ('Productor Intermedio', 25000);
+
+INSERT INTO dcs_categoria_asociado (cat_descripcion, cat_monto_cuota_mensual) 
+VALUES ('Productor Avanzado', 35000);
+
+-- 3. TIPOS DE CONTACTO
+INSERT INTO dcs_tipo_contacto (tc_nombre) VALUES ('Teléfono');
+INSERT INTO dcs_tipo_contacto (tc_nombre) VALUES ('Email');
+INSERT INTO dcs_tipo_contacto (tc_nombre) VALUES ('WhatsApp');
+
+-- 4. ESTADOS GENERALES
 INSERT INTO dcs_estado_general (est_descripcion) VALUES ('Activo');
 INSERT INTO dcs_estado_general (est_descripcion) VALUES ('Inactivo');
+INSERT INTO dcs_estado_general (est_descripcion) VALUES ('Pendiente');
 INSERT INTO dcs_estado_general (est_descripcion) VALUES ('Aprobado');
 INSERT INTO dcs_estado_general (est_descripcion) VALUES ('Rechazado');
-INSERT INTO dcs_estado_general (est_descripcion) VALUES ('En Proceso');
-INSERT INTO dcs_estado_general (est_descripcion) VALUES ('Finalizado');
+INSERT INTO dcs_estado_general (est_descripcion) VALUES ('Cancelado');
 
--- Insertar etapas de ensayo
+-- 5. ETAPAS DE ENSAYO
 INSERT INTO dcs_etapa_ensayo (eta_nombre, eta_estado, eta_comentario) 
-VALUES ('Germinación y Vigor', 'A', 'Etapa inicial de crecimiento');
+VALUES ('Germinación y Vigor', 'A', 'Etapa inicial de desarrollo');
+
 INSERT INTO dcs_etapa_ensayo (eta_nombre, eta_estado, eta_comentario) 
-VALUES ('Floración', 'A', 'Etapa de desarrollo floral');
+VALUES ('Floración', 'A', 'Etapa de floración del cultivo');
+
 INSERT INTO dcs_etapa_ensayo (eta_nombre, eta_estado, eta_comentario) 
-VALUES ('Maduración', 'A', 'Etapa final de desarrollo');
+VALUES ('Maduración', 'A', 'Etapa final de maduración');
 
--- Insertar cosechas
+-- 6. COSECHAS
 INSERT INTO dcs_cosecha (cos_nombre, cos_fecha_inicio, cos_fecha_fin) 
-VALUES ('Cosecha 2024-1', DATE '2024-01-15', DATE '2024-06-30');
+VALUES ('Cosecha 2024-2025', DATE '2024-10-01', DATE '2025-03-31');
+
 INSERT INTO dcs_cosecha (cos_nombre, cos_fecha_inicio, cos_fecha_fin) 
-VALUES ('Cosecha 2024-2', DATE '2024-07-01', DATE '2024-12-31');
-INSERT INTO dcs_cosecha (cos_nombre, cos_fecha_inicio, cos_fecha_fin) 
-VALUES ('Cosecha 2025-1', DATE '2025-01-01', DATE '2025-06-30');
+VALUES ('Cosecha 2025-2026', DATE '2025-04-01', DATE '2025-09-30');
 
--- Insertar personas físicas
-INSERT INTO dcs_persona_fisica (per_identificacion, per_nombre, per_apellido1, per_apellido2, per_fecha_nacimiento, per_sexo, fin_id) 
-VALUES ('105550001', 'Juan Carlos', 'Rodríguez', 'Morales', DATE '1980-03-15', 'M', NULL);
-INSERT INTO dcs_persona_fisica (per_identificacion, per_nombre, per_apellido1, per_apellido2, per_fecha_nacimiento, per_sexo, fin_id) 
-VALUES ('204440002', 'María Elena', 'González', 'Vargas', DATE '1975-08-22', 'F', NULL);
-INSERT INTO dcs_persona_fisica (per_identificacion, per_nombre, per_apellido1, per_apellido2, per_fecha_nacimiento, per_sexo, fin_id) 
-VALUES ('303330003', 'Carlos Alberto', 'Jiménez', 'Solís', DATE '1985-11-10', 'M', NULL);
-INSERT INTO dcs_persona_fisica (per_identificacion, per_nombre, per_apellido1, per_apellido2, per_fecha_nacimiento, per_sexo, fin_id) 
-VALUES ('402220004', 'Ana Lucía', 'Herrera', 'Castro', DATE '1978-05-30', 'F', NULL);
-INSERT INTO dcs_persona_fisica (per_identificacion, per_nombre, per_apellido1, per_apellido2, per_fecha_nacimiento, per_sexo, fin_id) 
-VALUES ('501110005', 'Roberto', 'Alfaro', 'Pérez', DATE '1982-09-12', 'M', NULL);
-INSERT INTO dcs_persona_fisica (per_identificacion, per_nombre, per_apellido1, per_apellido2, per_fecha_nacimiento, per_sexo, fin_id) 
-VALUES ('600000006', 'Ingeniero Luis', 'Martínez', 'Rojas', DATE '1979-01-20', 'M', NULL);
+-- 7. PERSONAS FÍSICAS (Incluye productores, ingenieros, asociados)
+INSERT INTO dcs_persona_fisica (per_identificacion, per_nombre, per_apellido1, per_apellido2, per_fecha_nacimiento, per_sexo) 
+VALUES ('105470123', 'Carlos', 'Rodríguez', 'Mora', DATE '1975-03-15', 'M');
 
--- Insertar fincas
+INSERT INTO dcs_persona_fisica (per_identificacion, per_nombre, per_apellido1, per_apellido2, per_fecha_nacimiento, per_sexo) 
+VALUES ('204560789', 'María', 'González', 'Vega', DATE '1980-07-22', 'F');
+
+INSERT INTO dcs_persona_fisica (per_identificacion, per_nombre, per_apellido1, per_apellido2, per_fecha_nacimiento, per_sexo) 
+VALUES ('301230456', 'Luis', 'Chacón', 'Jiménez', DATE '1978-11-10', 'M');
+
+INSERT INTO dcs_persona_fisica (per_identificacion, per_nombre, per_apellido1, per_apellido2, per_fecha_nacimiento, per_sexo) 
+VALUES ('402340567', 'Ana', 'Vargas', 'Castro', DATE '1982-02-28', 'F');
+
+INSERT INTO dcs_persona_fisica (per_identificacion, per_nombre, per_apellido1, per_apellido2, per_fecha_nacimiento, per_sexo) 
+VALUES ('503450678', 'José', 'Pérez', 'Morales', DATE '1976-09-14', 'M');
+
+-- 8. INGENIEROS
+INSERT INTO dcs_ingeniero (codigo, per_id) VALUES (1001, 3); -- Luis Chacón
+INSERT INTO dcs_ingeniero (codigo, per_id) VALUES (1002, 4); -- Ana Vargas
+
+-- 9. FINCAS
 INSERT INTO dcs_finca (fin_numero_registro, fin_nombre, fin_tamano_hectareas, fin_estado, fin_direccion, per_id) 
-VALUES ('F001-2024', 'Finca El Cafetal', 25.5, 'A', 'San Marcos de Tarrazú, 2km norte del centro', 1);
+VALUES ('REG-001', 'Finca El Cafetal', 15.5, 'A', 'San Marcos de Tarrazú, 2km norte del centro', 1);
+
 INSERT INTO dcs_finca (fin_numero_registro, fin_nombre, fin_tamano_hectareas, fin_estado, fin_direccion, per_id) 
-VALUES ('F002-2024', 'Finca Los Naranjos', 18.0, 'A', 'San Lorenzo de Tarrazú, 1.5km sur de la escuela', 2);
+VALUES ('REG-002', 'Finca Santa Rosa', 8.3, 'A', 'Santa María de Dota, 1km este de la iglesia', 2);
+
 INSERT INTO dcs_finca (fin_numero_registro, fin_nombre, fin_tamano_hectareas, fin_estado, fin_direccion, per_id) 
-VALUES ('F003-2024', 'Finca Santa Rosa', 32.2, 'A', 'San Carlos de Tarrazú, 3km oeste del pueblo', 3);
-INSERT INTO dcs_finca (fin_numero_registro, fin_nombre, fin_tamano_hectareas, fin_estado, fin_direccion, per_id) 
-VALUES ('F004-2024', 'Finca La Esperanza', 15.8, 'A', 'Dota, 2.5km norte de la iglesia', 4);
+VALUES ('REG-003', 'Finca Los Cedros', 12.0, 'A', 'San Lorenzo de Tarrazú, entrada principal', 5);
 
--- Insertar lotes
+-- 10. LOTES
 INSERT INTO dcs_lote (lot_nombre, lot_tamano_hectareas, lot_descripcion, lot_direccion, fin_id) 
-VALUES ('Lote A1', 8.5, 'Lote con excelente drenaje', 'Sector norte de la finca', 1);
-INSERT INTO dcs_lote (lot_nombre, lot_tamano_hectareas, lot_descripcion, lot_direccion, fin_id) 
-VALUES ('Lote A2', 10.0, 'Lote en terreno plano', 'Sector central de la finca', 1);
-INSERT INTO dcs_lote (lot_nombre, lot_tamano_hectareas, lot_descripcion, lot_direccion, fin_id) 
-VALUES ('Lote B1', 9.0, 'Lote con pendiente suave', 'Sector sur de la finca', 2);
-INSERT INTO dcs_lote (lot_nombre, lot_tamano_hectareas, lot_descripcion, lot_direccion, fin_id) 
-VALUES ('Lote B2', 9.0, 'Lote cerca del río', 'Sector este de la finca', 2);
-INSERT INTO dcs_lote (lot_nombre, lot_tamano_hectareas, lot_descripcion, lot_direccion, fin_id) 
-VALUES ('Lote C1', 12.0, 'Lote en altura', 'Sector montañoso', 3);
-INSERT INTO dcs_lote (lot_nombre, lot_tamano_hectareas, lot_descripcion, lot_direccion, fin_id) 
-VALUES ('Lote C2', 15.0, 'Lote experimental', 'Sector oeste de la finca', 3);
+VALUES ('Lote A1', 3.5, 'Lote principal con exposición sur', 'Sector norte de la finca', 1);
 
--- Insertar asociados
-INSERT INTO dcs_asociado (aso_fecha_ingreso, aso_estado, aso_cuota_afiliacion, per_id, cat_id, asociacion_id) 
-VALUES (DATE '2023-01-15', 'A', 50000, 1, 1, 1);
-INSERT INTO dcs_asociado (aso_fecha_ingreso, aso_estado, aso_cuota_afiliacion, per_id, cat_id, asociacion_id) 
-VALUES (DATE '2023-02-20', 'A', 50000, 2, 2, 1);
-INSERT INTO dcs_asociado (aso_fecha_ingreso, aso_estado, aso_cuota_afiliacion, per_id, cat_id, asociacion_id) 
-VALUES (DATE '2023-03-10', 'A', 50000, 3, 2, 1);
-INSERT INTO dcs_asociado (aso_fecha_ingreso, aso_estado, aso_cuota_afiliacion, per_id, cat_id, asociacion_id) 
-VALUES (DATE '2023-04-05', 'A', 50000, 4, 3, 1);
-INSERT INTO dcs_asociado (aso_fecha_ingreso, aso_estado, aso_cuota_afiliacion, per_id, cat_id, asociacion_id) 
-VALUES (DATE '2023-05-12', 'A', 50000, 5, 1, 1);
+INSERT INTO dcs_lote (lot_nombre, lot_tamano_hectareas, lot_descripcion, lot_direccion, fin_id) 
+VALUES ('Lote A2', 2.8, 'Lote experimental', 'Sector este de la finca', 1);
 
--- Insertar ingenieros
-INSERT INTO dcs_ingeniero (codigo, per_id) VALUES (1001, 6);
+INSERT INTO dcs_lote (lot_nombre, lot_tamano_hectareas, lot_descripcion, lot_direccion, fin_id) 
+VALUES ('Lote B1', 4.0, 'Lote para reproducción', 'Sector central de la finca', 2);
 
--- Insertar unidades de medida
+INSERT INTO dcs_lote (lot_nombre, lot_tamano_hectareas, lot_descripcion, lot_direccion, fin_id) 
+VALUES ('Lote C1', 5.2, 'Lote principal de producción', 'Ladera oeste de la finca', 3);
+
+-- 11. ASOCIADOS
+INSERT INTO dcs_asociado (aso_fecha_ingreso, aso_estado, aso_cuota_afiliacion, per_id, cat_id, asociacion_id) 
+VALUES (DATE '2023-01-15', 'A', 50000, 1, 2, 1); -- Carlos Rodríguez
+
+INSERT INTO dcs_asociado (aso_fecha_ingreso, aso_estado, aso_cuota_afiliacion, per_id, cat_id, asociacion_id) 
+VALUES (DATE '2023-03-20', 'A', 50000, 2, 1, 1); -- María González
+
+INSERT INTO dcs_asociado (aso_fecha_ingreso, aso_estado, aso_cuota_afiliacion, per_id, cat_id, asociacion_id) 
+VALUES (DATE '2023-06-10', 'A', 50000, 5, 3, 1); -- José Pérez
+
+-- 12. JUNTA DIRECTIVA
+INSERT INTO dcs_junta_directiva (jun_puesto, jun_fecha_inicio, jun_fecha_fin, aso_id, per_id, asociacion_id) 
+VALUES ('Presidente', DATE '2024-01-01', DATE '2025-12-31', 1, 1, 1);
+
+INSERT INTO dcs_junta_directiva (jun_puesto, jun_fecha_inicio, jun_fecha_fin, aso_id, per_id, asociacion_id) 
+VALUES ('Secretaria', DATE '2024-01-01', DATE '2025-12-31', 2, 2, 1);
+
+-- 13. CONTACTOS
+INSERT INTO dcs_contacto (con_valor, tc_id, per_id, asociacion_id) 
+VALUES ('8765-4321', 1, 1, NULL); -- Teléfono Carlos
+
+INSERT INTO dcs_contacto (con_valor, tc_id, per_id, asociacion_id) 
+VALUES ('carlos@email.com', 2, 1, NULL); -- Email Carlos
+
+INSERT INTO dcs_contacto (con_valor, tc_id, per_id, asociacion_id) 
+VALUES ('8888-9999', 1, 2, NULL); -- Teléfono María
+
+INSERT INTO dcs_contacto (con_valor, tc_id, per_id, asociacion_id) 
+VALUES ('info@tarrazu.com', 2, NULL, 1); -- Email Asociación
+
+-- 14. UNIDADES DE MEDIDA
 INSERT INTO dcs_unidad_medida (uni_descripcion, uni_conversion_base) 
-VALUES ('Kilogramo', 1.0);
-INSERT INTO dcs_unidad_medida (uni_descripcion, uni_conversion_base) 
-VALUES ('Libra', 0.453592);
-INSERT INTO dcs_unidad_medida (uni_descripcion, uni_conversion_base) 
-VALUES ('Quintal', 45.3592);
+VALUES ('Kilogramos', 1.0);
 
--- Insertar semillas
+INSERT INTO dcs_unidad_medida (uni_descripcion, uni_conversion_base) 
+VALUES ('Quintales', 46.0);
+
+INSERT INTO dcs_unidad_medida (uni_descripcion, uni_conversion_base) 
+VALUES ('Libras', 0.454);
+
+-- 15. SEMILLAS
 INSERT INTO dcs_semilla (sem_nombre) VALUES ('Café Arábica');
-INSERT INTO dcs_semilla (sem_nombre) VALUES ('Café Robusta');
-INSERT INTO dcs_semilla (sem_nombre) VALUES ('Frijol Negro');
+INSERT INTO dcs_semilla (sem_nombre) VALUES ('Café Robusta'); 
 
--- Insertar variedades
+-- 16. VARIEDADES
 INSERT INTO dcs_variedad (var_nombre, var_tiempo_cosecha_dias, var_precio_unitario, sem_id, uni_id) 
-VALUES ('Caturra', 240, 3500.00, 1, 1);
-INSERT INTO dcs_variedad (var_nombre, var_tiempo_cosecha_dias, var_precio_unitario, sem_id, uni_id) 
-VALUES ('Catuaí Rojo', 250, 3800.00, 1, 1);
-INSERT INTO dcs_variedad (var_nombre, var_tiempo_cosecha_dias, var_precio_unitario, sem_id, uni_id) 
-VALUES ('Villa Sarchí', 260, 4000.00, 1, 1);
-INSERT INTO dcs_variedad (var_nombre, var_tiempo_cosecha_dias, var_precio_unitario, sem_id, uni_id) 
-VALUES ('Frijol Criollo', 90, 2500.00, 3, 1);
+VALUES ('Geisha', 270, 8500, 1, 1);
 
--- Insertar plagas
+INSERT INTO dcs_variedad (var_nombre, var_tiempo_cosecha_dias, var_precio_unitario, sem_id, uni_id) 
+VALUES ('Caturra', 240, 6200, 1, 1);
+
+INSERT INTO dcs_variedad (var_nombre, var_tiempo_cosecha_dias, var_precio_unitario, sem_id, uni_id) 
+VALUES ('Villa Sarchí', 260, 7300, 1, 1);
+
+-- 17. PLAGAS
 INSERT INTO dcs_plaga (pla_nombre, pla_descripcion, pla_tratamiento, pla_etapa_desarrollo) 
-VALUES ('Broca del Café', 'Insecto que perfora los granos de café', 'Aplicación de insecticida específico', 'F');
+VALUES ('Broca del café', 'Insecto que perfora los granos de café', 'Aplicación de insecticida específico', '2');
+
 INSERT INTO dcs_plaga (pla_nombre, pla_descripcion, pla_tratamiento, pla_etapa_desarrollo) 
-VALUES ('Cochinilla', 'Insecto que succiona la savia', 'Control biológico con depredadores', 'V');
+VALUES ('Minador de la hoja', 'Larva que daña las hojas del café', 'Control biológico con parasitoides', '1');
 
--- Insertar enfermedades
+-- 18. ENFERMEDADES
 INSERT INTO dcs_enfermedad (enf_nombre, enf_ubicacion_planta, enf_tratamiento, enf_etapa_desarrollo) 
-VALUES ('Roya del Café', 'Hojas', 'Fungicida sistémico', 'Vegetativa');
-INSERT INTO dcs_enfermedad (enf_nombre, enf_ubicacion_planta, enf_tratamiento, enf_etapa_desarrollo) 
-VALUES ('Antracnosis', 'Frutos', 'Fungicida preventivo', 'Reproductiva');
+VALUES ('Roya del café', 'Hojas', 'Fungicida cúprico', 'Vegetativa');
 
--- Insertar síntomas
+INSERT INTO dcs_enfermedad (enf_nombre, enf_ubicacion_planta, enf_tratamiento, enf_etapa_desarrollo) 
+VALUES ('Antracnosis', 'Frutos', 'Fungicida sistémico', 'Reproductiva');
+
+-- 19. SÍNTOMAS
 INSERT INTO dcs_sintomas (sin_tipo, sin_nombre, enf_id) 
 VALUES ('V', 'Manchas amarillas en hojas', 1);
+
 INSERT INTO dcs_sintomas (sin_tipo, sin_nombre, enf_id) 
-VALUES ('F', 'Manchas negras en frutos', 2);
+VALUES ('F', 'Lesiones oscuras en frutos', 2);
 
--- Insertar reproducciones
+-- 20. REPRODUCCIÓN
 INSERT INTO dcs_reproduccion (rep_numero_contrato, rep_fecha_siembra_inicio, rep_fecha_siembra_fin, 
                              rep_fecha_cosecha_inicio, rep_fecha_cosecha_fin, rep_hectareas_sembradas, 
                              per_id, fin_id, lot_id, est_id, cos_id, inge_id) 
-VALUES (2024001, DATE '2024-02-01', DATE '2024-02-15', DATE '2024-09-01', DATE '2024-09-30', 
-        8.5, 1, 1, 1, 6, 1, 1);
+VALUES (2024001, DATE '2024-10-15', DATE '2024-11-30', DATE '2025-07-01', DATE '2025-08-15', 
+        3.5, 1, 1, 1, 1, 1, 
+        (SELECT inge_id FROM dcs_ingeniero WHERE per_id = 3)); -- Luis Chacón
+
 INSERT INTO dcs_reproduccion (rep_numero_contrato, rep_fecha_siembra_inicio, rep_fecha_siembra_fin, 
                              rep_fecha_cosecha_inicio, rep_fecha_cosecha_fin, rep_hectareas_sembradas, 
                              per_id, fin_id, lot_id, est_id, cos_id, inge_id) 
-VALUES (2024002, DATE '2024-02-10', DATE '2024-02-25', DATE '2024-09-15', DATE '2024-10-15', 
-        9.0, 2, 2, 3, 6, 1, 1);
+VALUES (2024002, DATE '2024-11-01', DATE '2024-12-15', DATE '2025-07-15', DATE '2025-08-30', 
+        4.0, 2, 2, 3, 1, 1, 
+        (SELECT inge_id FROM dcs_ingeniero WHERE per_id = 4)); -- Ana Vargas
+
 INSERT INTO dcs_reproduccion (rep_numero_contrato, rep_fecha_siembra_inicio, rep_fecha_siembra_fin, 
                              rep_fecha_cosecha_inicio, rep_fecha_cosecha_fin, rep_hectareas_sembradas, 
                              per_id, fin_id, lot_id, est_id, cos_id, inge_id) 
-VALUES (2024003, DATE '2024-03-01', DATE '2024-03-15', DATE '2024-10-01', DATE '2024-10-31', 
-        12.0, 3, 3, 5, 6, 1, 1);
+VALUES (2024003, DATE '2024-12-01', DATE '2025-01-15', DATE '2025-08-01', DATE '2025-09-15', 
+        5.2, 5, 3, 4, 1, 1, 
+        (SELECT inge_id FROM dcs_ingeniero WHERE per_id = 3)); -- Luis Chacón
 
--- Insertar inspecciones
+-- 21. INSPECCIONES
 INSERT INTO dcs_inspeccion (ins_fecha, ins_comentario, rep_id) 
-VALUES (DATE '2024-04-15', 'Plantación en buen estado, crecimiento normal', 1);
+VALUES (DATE '2025-01-15', 'Desarrollo normal de plantas, buen establecimiento del cultivo', 
+        (SELECT rep_id FROM dcs_reproduccion WHERE rep_numero_contrato = 2024001));
+
 INSERT INTO dcs_inspeccion (ins_fecha, ins_comentario, rep_id) 
-VALUES (DATE '2024-05-20', 'Se detectaron algunos síntomas de roya en sector norte', 1);
+VALUES (DATE '2025-02-20', 'Se observa presencia leve de malezas, se recomienda control', 
+        (SELECT rep_id FROM dcs_reproduccion WHERE rep_numero_contrato = 2024002));
+
 INSERT INTO dcs_inspeccion (ins_fecha, ins_comentario, rep_id) 
-VALUES (DATE '2024-04-25', 'Excelente desarrollo de las plantas', 2);
-INSERT INTO dcs_inspeccion (ins_fecha, ins_comentario, rep_id) 
-VALUES (DATE '2024-05-10', 'Plantación sin problemas aparentes', 3);
+VALUES (DATE '2025-03-10', 'Excelente desarrollo vegetativo, plantas vigorosas', 
+        (SELECT rep_id FROM dcs_reproduccion WHERE rep_numero_contrato = 2024003));
 
--- Insertar análisis
+-- 22. ANÁLISIS DE LABORATORIO
 INSERT INTO dcs_analisis (ana_motivo, ana_porcentaje_semilla_sana, ana_monto, ana_estado, rep_id) 
-VALUES ('Análisis de calidad rutinario', 95.5, 75000, 'A', 1);
-INSERT INTO dcs_analisis (ana_motivo, ana_porcentaje_semilla_sana, ana_monto, ana_estado, rep_id) 
-VALUES ('Análisis por sospecha de enfermedad', 88.2, 85000, 'A', 1);
-INSERT INTO dcs_analisis (ana_motivo, ana_porcentaje_semilla_sana, ana_monto, ana_estado, rep_id) 
-VALUES ('Análisis de calidad rutinario', 92.8, 75000, 'A', 2);
-INSERT INTO dcs_analisis (ana_motivo, ana_porcentaje_semilla_sana, ana_monto, ana_estado, rep_id) 
-VALUES ('Análisis final de cosecha', 97.1, 80000, 'A', 3);
+VALUES ('Control de calidad rutinario', 95.5, 75000, 'A', 
+        (SELECT rep_id FROM dcs_reproduccion WHERE rep_numero_contrato = 2024001));
 
--- Insertar relaciones análisis-enfermedad
-INSERT INTO dcs_analisis_enfermedad (ana_id, enf_id) VALUES (2, 1);
+INSERT INTO dcs_analisis (ana_motivo, ana_porcentaje_semilla_sana, ana_monto, ana_estado, rep_id) 
+VALUES ('Análisis pre-cosecha', 88.2, 65000, 'A', 
+        (SELECT rep_id FROM dcs_reproduccion WHERE rep_numero_contrato = 2024002));
 
--- Insertar relaciones análisis-plaga
-INSERT INTO dcs_analisis_plaga (ana_id, pla_id) VALUES (2, 1);
+INSERT INTO dcs_analisis (ana_motivo, ana_porcentaje_semilla_sana, ana_monto, ana_estado, rep_id) 
+VALUES ('Verificación fitosanitaria', 92.8, 70000, 'P', 
+        (SELECT rep_id FROM dcs_reproduccion WHERE rep_numero_contrato = 2024003));
 
--- Insertar productos
+-- 23. ANÁLISIS - PLAGAS
+INSERT INTO dcs_analisis_plaga (ana_id, pla_id) 
+VALUES ((SELECT ana_id FROM dcs_analisis WHERE ana_motivo = 'Control de calidad rutinario'), 1);
+
+INSERT INTO dcs_analisis_plaga (ana_id, pla_id) 
+VALUES ((SELECT ana_id FROM dcs_analisis WHERE ana_motivo = 'Análisis pre-cosecha'), 2);
+
+-- 24. ANÁLISIS - ENFERMEDADES  
+INSERT INTO dcs_analisis_enfermedad (ana_id, enf_id) 
+VALUES ((SELECT ana_id FROM dcs_analisis WHERE ana_motivo = 'Control de calidad rutinario'), 1);
+
+INSERT INTO dcs_analisis_enfermedad (ana_id, enf_id) 
+VALUES ((SELECT ana_id FROM dcs_analisis WHERE ana_motivo = 'Verificación fitosanitaria'), 2);
+
+-- 25. PRODUCTOS
 INSERT INTO dcs_producto (pro_nombre, pro_cantidad, var_id, rep_id) 
-VALUES ('Café Caturra Premium', 1200.5, 1, 1);
-INSERT INTO dcs_producto (pro_nombre, pro_cantidad, var_id, rep_id) 
-VALUES ('Café Catuaí Especial', 980.2, 2, 2);
-INSERT INTO dcs_producto (pro_nombre, pro_cantidad, var_id, rep_id) 
-VALUES ('Café Villa Sarchí Select', 1450.8, 3, 3);
+VALUES ('Café Geisha Premium', 850.5, 1, 
+        (SELECT rep_id FROM dcs_reproduccion WHERE rep_numero_contrato = 2024001));
 
--- Insertar pagos a productores
-INSERT INTO dcs_pago_productor (pag_cantidad, pag_precio_unitario, pag_fecha_pago, per_id, pro_id) 
-VALUES (1200.5, 3500.00, DATE '2024-10-15', 1, 1);
-INSERT INTO dcs_pago_productor (pag_cantidad, pag_precio_unitario, pag_fecha_pago, per_id, pro_id) 
-VALUES (980.2, 3800.00, DATE '2024-10-20', 2, 2);
-INSERT INTO dcs_pago_productor (pag_cantidad, pag_precio_unitario, pag_fecha_pago, per_id, pro_id) 
-VALUES (1450.8, 4000.00, DATE '2024-11-05', 3, 3);
+INSERT INTO dcs_producto (pro_nombre, pro_cantidad, var_id, rep_id) 
+VALUES ('Café Caturra Tradicional', 1200.3, 2, 
+        (SELECT rep_id FROM dcs_reproduccion WHERE rep_numero_contrato = 2024002));
 
--- Insertar ensayos
+INSERT INTO dcs_producto (pro_nombre, pro_cantidad, var_id, rep_id) 
+VALUES ('Café Villa Sarchí Especial', 1450.8, 3, 
+        (SELECT rep_id FROM dcs_reproduccion WHERE rep_numero_contrato = 2024003));
+
+-- 26. PAGOS A PRODUCTORES
+INSERT INTO dcs_pago_productor (pag_cantidad, pag_precio_unitario, pag_fecha_pago, per_id, pro_id) 
+VALUES (850.5, 8500, DATE '2025-08-20', 1, 
+        (SELECT pro_id FROM dcs_producto WHERE pro_nombre = 'Café Geisha Premium'));
+
+INSERT INTO dcs_pago_productor (pag_cantidad, pag_precio_unitario, pag_fecha_pago, per_id, pro_id) 
+VALUES (1200.3, 6200, DATE '2025-09-05', 2, 
+        (SELECT pro_id FROM dcs_producto WHERE pro_nombre = 'Café Caturra Tradicional'));
+
+INSERT INTO dcs_pago_productor (pag_cantidad, pag_precio_unitario, pag_fecha_pago, per_id, pro_id) 
+VALUES (1450.8, 7300, DATE '2025-09-20', 5, 
+        (SELECT pro_id FROM dcs_producto WHERE pro_nombre = 'Café Villa Sarchí Especial'));
+
+-- 27. ENSAYOS
 INSERT INTO dcs_ensayo (ens_nombre, ens_fecha_siembra_inicio, ens_fecha_siembra_fin, 
                        ens_fecha_cosecha_inicio, ens_fecha_cosecha_fin, ens_usuario_registro, 
                        cos_id, per_id, lot_id, est_id, eta_id) 
-VALUES ('Ensayo Resistencia Roya 2024', DATE '2024-03-01', DATE '2024-03-10', 
-        DATE '2024-10-01', DATE '2024-10-15', 'admin', 1, 4, 2, 5, 1);
+VALUES ('Ensayo Resistencia Roya', DATE '2024-11-15', DATE '2024-12-01', 
+        DATE '2025-08-01', DATE '2025-08-15', 'ing_luis', 1, 3, 2, 1, 2);
+
 INSERT INTO dcs_ensayo (ens_nombre, ens_fecha_siembra_inicio, ens_fecha_siembra_fin, 
                        ens_fecha_cosecha_inicio, ens_fecha_cosecha_fin, ens_usuario_registro, 
                        cos_id, per_id, lot_id, est_id, eta_id) 
-VALUES ('Ensayo Nuevas Variedades', DATE '2024-04-01', DATE '2024-04-10', 
-        DATE '2024-11-01', DATE '2024-11-15', 'admin', 1, 5, 4, 5, 2);
-
--- Insertar contactos
-INSERT INTO dcs_contacto (con_valor, tc_id, per_id, asociacion_id) 
-VALUES ('8888-1111', 1, 1, NULL);
-INSERT INTO dcs_contacto (con_valor, tc_id, per_id, asociacion_id) 
-VALUES ('juan.rodriguez@email.com', 2, 1, NULL);
-INSERT INTO dcs_contacto (con_valor, tc_id, per_id, asociacion_id) 
-VALUES ('8888-2222', 1, 2, NULL);
-INSERT INTO dcs_contacto (con_valor, tc_id, per_id, asociacion_id) 
-VALUES ('maria.gonzalez@email.com', 2, 2, NULL);
-INSERT INTO dcs_contacto (con_valor, tc_id, per_id, asociacion_id) 
-VALUES ('8888-6666', 1, 6, NULL);
-INSERT INTO dcs_contacto (con_valor, tc_id, per_id, asociacion_id) 
-VALUES ('ing.martinez@email.com', 2, 6, NULL);
-INSERT INTO dcs_contacto (con_valor, tc_id, per_id, asociacion_id) 
-VALUES ('2222-3333', 1, NULL, 1);
-INSERT INTO dcs_contacto (con_valor, tc_id, per_id, asociacion_id) 
-VALUES ('info@tarrazu.com', 2, NULL, 1);
-
--- Insertar junta directiva
-INSERT INTO dcs_junta_directiva (jun_puesto, jun_fecha_inicio, jun_fecha_fin, aso_id, per_id, asociacion_id) 
-VALUES ('Presidente', DATE '2024-01-01', DATE '2024-12-31', 1, 1, 1);
-INSERT INTO dcs_junta_directiva (jun_puesto, jun_fecha_inicio, jun_fecha_fin, aso_id, per_id, asociacion_id) 
-VALUES ('Vicepresidente', DATE '2024-01-01', DATE '2024-12-31', 2, 2, 1);
-INSERT INTO dcs_junta_directiva (jun_puesto, jun_fecha_inicio, jun_fecha_fin, aso_id, per_id, asociacion_id) 
-VALUES ('Secretario', DATE '2024-01-01', DATE '2024-12-31', 3, 3, 1);
-INSERT INTO dcs_junta_directiva (jun_puesto, jun_fecha_inicio, jun_fecha_fin, aso_id, per_id, asociacion_id) 
-VALUES ('Tesorero', DATE '2024-01-01', DATE '2024-12-31', 4, 4, 1);
+VALUES ('Ensayo Productividad', DATE '2025-01-10', DATE '2025-01-25', 
+        DATE '2025-09-01', DATE '2025-09-15', 'ing_ana', 2, 4, 1, 1, 1);
 
 COMMIT;
